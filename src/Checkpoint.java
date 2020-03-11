@@ -3,9 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class Checkpoint {
+	static int num = 0;
+	
 	public static void main(String[] args) {
 		/*
 		 * The auto-mgp.data file contains the miles-per-gallon data on various different types of cars.
@@ -29,7 +32,29 @@ public class Checkpoint {
 		 * 
 		 * 5. Print only the cars with "toyota" in the name.
 		 */
+
+		Stream<CarMPGEntry> c = readCarMPGEntryDataFromFile().stream();
 		
+		c.forEach( new Consumer() {
+
+			@Override
+			public void accept( Object t) {
+				num++;
+				CarMPGEntry t2 = (CarMPGEntry)t;
+				System.out.println( t2.carName );
+			}
+			
+		});
+		
+		System.out.println("----------");
+		
+		c = readCarMPGEntryDataFromFile().stream();
+		c.forEach( (CarMPGEntry e)-> System.out.println( e.mpg ) );
+		
+		System.out.println("----------" + num );
+		
+		c = readCarMPGEntryDataFromFile().stream();
+		c.sorted( ( t1,t2 )-> t1.carName.compareToIgnoreCase(t2.carName) ).forEach( (CarMPGEntry e)-> System.out.println( e.carName ) );
 		
 	}
 	
