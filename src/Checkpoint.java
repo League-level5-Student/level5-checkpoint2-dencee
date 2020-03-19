@@ -33,29 +33,49 @@ public class Checkpoint {
 		 * 5. Print only the cars with "toyota" in the name.
 		 */
 
-		Stream<CarMPGEntry> c = readCarMPGEntryDataFromFile().stream();
+	    Stream<CarMPGEntry> c;
+	    
+//	    System.out.println("---------- Print entire list ----------------");
+//		c = readCarMPGEntryDataFromFile().stream();
+//		c.forEach( (CarMPGEntry e) -> System.out.println( e.carName ) );
 		
-		c.forEach( new Consumer() {
+//		
+//		c.forEach( new Consumer() {
+//
+//			@Override
+//			public void accept( Object t) {
+//				num++;
+//				CarMPGEntry t2 = (CarMPGEntry)t;
+//				System.out.println( t2.carName );
+//			}
+//			
+//		});
+//		
+//		System.out.println("----------Sort by mpg ----------------");
+//		
+//		c = readCarMPGEntryDataFromFile().stream();
+//		    c.sorted( ( t1, t2 ) -> (int)( t1.mpg - t2.mpg ) )
+//		    .forEach( (CarMPGEntry e)-> System.out.println( e.mpg + " " + e.carName ) );
+//		
+//		System.out.println("---------- Sort by Car name ----------" );
+//		
+//		c = readCarMPGEntryDataFromFile().stream();
+//		    c.sorted( ( t1, t2 )-> t1.carName.compareToIgnoreCase(t2.carName) )
+//		    .forEach( (CarMPGEntry e)-> System.out.println( e.mpg + " " + e.carName ) );
+	    
+//	    System.out.println("---------- all 8 cylinders removed ----------------");
+//	        
+//	    c = readCarMPGEntryDataFromFile().stream();
+//	        c.filter( ( t1 ) -> t1.cylinders != 8 )
+//	        .sorted( ( t1, t2 ) -> t1.cylinders - t2.cylinders )
+//	        .forEach( (CarMPGEntry e) -> System.out.println( e.cylinders + " " + e.carName ) );
 
-			@Override
-			public void accept( Object t) {
-				num++;
-				CarMPGEntry t2 = (CarMPGEntry)t;
-				System.out.println( t2.carName );
-			}
-			
-		});
-		
-		System.out.println("----------");
-		
-		c = readCarMPGEntryDataFromFile().stream();
-		c.forEach( (CarMPGEntry e)-> System.out.println( e.mpg ) );
-		
-		System.out.println("----------" + num );
-		
-		c = readCarMPGEntryDataFromFile().stream();
-		c.sorted( ( t1,t2 )-> t1.carName.compareToIgnoreCase(t2.carName) ).forEach( (CarMPGEntry e)-> System.out.println( e.carName ) );
-		
+//	    System.out.println("---------- only Toyota ----------------");
+//	    
+	    c = readCarMPGEntryDataFromFile().stream();
+	    c.filter( ( t1 ) -> t1.carName.contains( "toyota" ) )
+	        .sorted( ( t1, t2 ) -> t1.carName.compareTo( t2.carName ) )
+	        .forEach( (CarMPGEntry e) -> System.out.println( e.carName ) );
 	}
 	
 	public static ArrayList<CarMPGEntry> readCarMPGEntryDataFromFile(){
